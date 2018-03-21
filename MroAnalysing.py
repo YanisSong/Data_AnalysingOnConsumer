@@ -1,18 +1,15 @@
-# from datetime import  datetime
-# from elasticsearch import Elasticsearch
 
-
-def dataProgramming():
-    fr = open(r"C:\Users\Administrator\Desktop\mro数据_前100.sql", encoding='UTF-8')
-    with open(r"C:\Users\Administrator\Desktop\destiny.txt", "a") as head:
+def dataProgramming(cf, rf):
+    with open(rf, "a") as head:
         head.write("eNBId, objectId, LteScRSRP, LteNcRSRP, LteScRSRQ, LteNcRSRQ, LteScTadv, "
                    "LteScAOA, LteScSinrUL, LteScEarfcn, LteScPci, Longitude, Latitude" + "\n")
     head.close()
+    fr = open(cf, encoding='gb18030', errors='ignore')
     for line in fr:
         strSet = line.split("VALUES")
         valueItem = strSet[1].lstrip(" (").replace(");", ",#@#")
         reason = processingLine(valueItem)
-        with open(r"C:\Users\Administrator\Desktop\destiny.txt", "a") as destiny:
+        with open(rf, "a") as destiny:
             destiny.write(reason + '\n')
     destiny.close()
     fr.close()
@@ -30,4 +27,4 @@ def processingLine(value):
     reasonItem = ''.join(valueList)
     return reasonItem
 
-dataProgramming()
+
