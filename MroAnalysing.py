@@ -1,4 +1,4 @@
-
+# File processing.
 def dataProgramming(cf, rf):
     with open(rf, "a") as head:
         head.write("eNBId, objectId, LteScRSRP, LteNcRSRP, LteScRSRQ, LteNcRSRQ, LteScTadv, "
@@ -15,6 +15,7 @@ def dataProgramming(cf, rf):
     fr.close()
 
 
+# Deal with the data in each line.
 def processingLine(value):
     valueSet = value.split(",")
     valueList = []

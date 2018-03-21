@@ -1,4 +1,5 @@
 import MroAnalysing as callMro
+import QuestionerOfLandSpotAnalysation as callLandSpot
 
 
 def callMroAlys():
@@ -8,5 +9,8 @@ def callMroAlys():
     resultURL = destinyPath
     callMro.dataProgramming(fileURL, resultURL)
 
+
+def callSpotAlys():
+    callLandSpot.analysingProcess()
 
 # def callQuesAly():
