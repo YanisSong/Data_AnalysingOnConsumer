@@ -1,5 +1,4 @@
-import MroAnalysing as callMro
-import QuestionerOfLandSpotAnalysation as callLandSpot
+from AnalysingPackage import MroAnalysing as callMro, QuestionerOfLandSpotAnalysation as callLandSpot
 
 
 def callMroAlys():

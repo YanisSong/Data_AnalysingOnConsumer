@@ -89,6 +89,6 @@ def statisticsProcess(total, useless, countingDict, distributeConsumerDict):
 
 
 # @Test
-data = dataProgramming()
-print(data)
+# data = dataProgramming()
+# print(data)
 

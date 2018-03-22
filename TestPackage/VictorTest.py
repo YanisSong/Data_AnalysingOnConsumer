@@ -10,17 +10,9 @@ def dickTest():
     print(dick)
 
 
-# data input and output interface.
-# Todo: Modifying the function use the input file URLs.
 def dataProgramming():
     filename = "D:\workDir\客服部调查问卷分析报告\云南5A风景区电信网络质量调查问卷清单.csv"
     outputUrl = "D:\workDir\客服部调查问卷分析报告\landspotResult.txt"
-    countingDict = {}
-    suggesstionDick = {}
-    totalCustomer = 0
-    uselessConsumer = 0
-    distributeConsumerDict = {}
-    # Todo: Add userDict in the future, which is used to analysing user information.
     fr = open(filename, encoding='gb18030', errors='ignore')
     for line in fr:
         reason = processingLine(line, outputUrl)
@@ -29,12 +21,10 @@ def dataProgramming():
             if "景区" in reason[0]:
                 print("HHHHH")
                 if "满意" in reason[1]:
-                    print(reason[1])
-                    print("LLLLLLL")
+                    print(reason[1] + "LLLLLLL")
+                    print()
             else:
                 print("yyyyyyyyyyyyyyyyyyyyyyyyyy")
-        else:
-            print("wwwwwwwwwwwwwwwwwwwwwwwwwwww")
     fr.close()
 
 
@@ -59,6 +49,7 @@ def processingLine(value, outputUrl):
 
 
 x = []
+
 
 def iii(i):
     print(len(i))
