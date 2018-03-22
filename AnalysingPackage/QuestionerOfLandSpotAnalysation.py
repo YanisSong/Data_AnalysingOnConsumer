@@ -56,6 +56,10 @@ def analysingProcess(reason, countingDict, suggesstionDick, totalCustomer, usele
             else:
                 distributeConsumerDict[reason[0]] = 1
         else:
+            if reason[0] in distributeConsumerDict:
+                distributeConsumerDict[reason[0]] += 1
+            else:
+                distributeConsumerDict[reason[0]] = 1
             if reason[0] in countingDict:
                 countingDict[reason[0]] += 1
             else:

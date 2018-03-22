@@ -3,7 +3,7 @@ from pylab import *
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
-import DataTransfer.LandSpotStatisticsData as LsDT
+from DataTransfer import LandSpotStatisticsData as LsDT
 
 
 mpl.rcParams['font.sans-serif'] = ['SimHei']
@@ -47,6 +47,7 @@ def DrawAnaGraph():
     plt.legend(loc='lower center', bbox_to_anchor=(0.8, 1.01), fancybox=True, ncol=5)
     # plt.xticks(rotation=90)
     # plt.savefig('123.pdf')
+    print(Map_List.items())
     plt.show()
 
 

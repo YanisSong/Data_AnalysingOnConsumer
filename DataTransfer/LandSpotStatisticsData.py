@@ -1,4 +1,5 @@
 from AnalysingPackage import QuestionerOfLandSpotAnalysation as DTinterface
+from AnalysingPackage import QuestionerOfLandSpotAnalysatoinOnFee as DTFinterface
 
 
 def QuestionerOFLSDT():
@@ -6,6 +7,16 @@ def QuestionerOFLSDT():
     return quesDS
 
 
+def QuestionerOFLSFDT():
+    DSF = DTFinterface.priceProgramming()
+    return DSF
+
+
+def QuestionerOFLSSDT():
+    DSS = DTFinterface.serviceProgramming()
+    return DSS
+
+
 # @Test
-# print(QuestionerOFLSDT())
+print(QuestionerOFLSFDT())
 
