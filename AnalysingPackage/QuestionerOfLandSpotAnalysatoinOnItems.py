@@ -14,8 +14,9 @@ def priceProgramming():
     for line in fr:
         reason = processingLine(line, outputUrl)
         if reason:
-            priceStatistics = analysingPrice(reason, countingDict, distributeConsumerDict)
+            analysingPrice(reason, countingDict, distributeConsumerDict)
     fr.close()
+    priceStatistics = priceProcess(countingDict, distributeConsumerDict)
     return priceStatistics
 
 
@@ -29,9 +30,10 @@ def serviceProgramming():
     for line in fr:
         reason = processingLine(line, outputUrl)
         if reason:
-            serviceStatistics = analysingServices(reason, countingDict, distributeConsumerDict)
+            analysingServices(reason, countingDict, distributeConsumerDict)
     fr.close()
-    return serviceStatistics
+    servicesStatistics = serviceProcess(countingDict, distributeConsumerDict)
+    return servicesStatistics
 
 
 # Data cleaning function.
@@ -70,8 +72,6 @@ def analysingPrice(reason, countingDict, distributeConsumerDict):
             countingDict[reason[2]] += 1
         else:
             countingDict[reason[2]] = 1
-    priceStatistics = priceProcess(countingDict, distributeConsumerDict)
-    return priceStatistics
 
 
 # Analysing function is used to collect different kinds of networks.
@@ -90,8 +90,6 @@ def analysingServices(reason, countingDict, distributeConsumerDict):
             countingDict[reason[1]] += 1
         else:
             countingDict[reason[1]] = 1
-    serviceStatistics = serviceProcess(countingDict, distributeConsumerDict)
-    return serviceStatistics
 
 
 # This function is used to deal with the statistics exhibition.
@@ -155,6 +153,6 @@ def serviceProcess(countingDict, distributeConsumerDict):
 
 
 # @Test
-# data = serviceProgramming()
+# data = priceProgramming()
 # print(data)
 

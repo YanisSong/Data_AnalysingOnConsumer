@@ -1,5 +1,5 @@
 from AnalysingPackage import QuestionerOfLandSpotAnalysation as DTinterface
-from AnalysingPackage import QuestionerOfLandSpotAnalysatoinOnFee as DTFinterface
+from AnalysingPackage import QuestionerOfLandSpotAnalysatoinOnItems as DTFinterface
 
 
 def QuestionerOFLSDT():
@@ -18,5 +18,5 @@ def QuestionerOFLSSDT():
 
 
 # @Test
-print(QuestionerOFLSFDT())
+# print(QuestionerOFLSFDT())
 

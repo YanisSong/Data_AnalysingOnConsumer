@@ -1,5 +1,6 @@
 # This module is used to analysing the questioner that is collected from the land spots.
 import re
+from DataTransfer import DataModifiedToExhibition as DtMo
 
 
 # data input and output interface.
@@ -8,6 +9,7 @@ def dataProgramming():
     filename = "D:\workDir\客服部调查问卷分析报告\云南5A风景区电信网络质量调查问卷清单.csv"
     outputUrl = "D:\workDir\客服部调查问卷分析报告\landspotResult.txt"
     countingDict = {}
+    unSatisfiedItems = {}
     suggesstionDick = {}
     totalCustomer = []
     uselessConsumer = []
@@ -17,9 +19,12 @@ def dataProgramming():
     for line in fr:
         reason = processingLine(line, outputUrl)
         if reason:
-            statistics = analysingProcess(reason, countingDict, suggesstionDick, totalCustomer,
-                                          uselessConsumer, distributeConsumerDict)
+            analysingProcess(reason, countingDict, suggesstionDick, totalCustomer, uselessConsumer,
+                             distributeConsumerDict, unSatisfiedItems)
     fr.close()
+    statistics = statisticsProcess(totalCustomer, uselessConsumer, countingDict, distributeConsumerDict)
+    resultResearch = unSatisfiedItemsResearch(countingDict, unSatisfiedItems)
+    DtMo.dataFromComputationToExhibition(statistics, resultResearch)
     return statistics
 
 
@@ -43,8 +48,10 @@ def processingLine(value, outputUrl):
     return valueList
 
 
-# Analysing function is used to collect different kinds of consumers' number and suggestions.
-def analysingProcess(reason, countingDict, suggesstionDick, totalCustomer, uselessConsumer, distributeConsumerDict):
+# Analysing function is used to collect different kinds of consumers' number and suggestions and store them in a
+# suitable data structure.
+def analysingProcess(reason, countingDict, suggesstionDick, totalCustomer, uselessConsumer,
+                     distributeConsumerDict, unSatisfiedItems):
     if ("---" in reason[0]) or ("上述一个都没去过" in reason[0]):
         uselessConsumer.append("1")
         totalCustomer.append("1")
@@ -64,6 +71,11 @@ def analysingProcess(reason, countingDict, suggesstionDick, totalCustomer, usele
                 countingDict[reason[0]] += 1
             else:
                 countingDict[reason[0]] = 1
+            if "一般" in reason[1]:
+                if reason[0] in unSatisfiedItems:
+                    unSatisfiedItems[reason[0]] += 1
+                else:
+                    unSatisfiedItems[reason[0]] = 1
         suggesstion = "满意度调查--"+"通话：" + reason[2] + ",即时信息:" + reason[3] \
                       + ",网络速度:" + reason[4] + ",个人意见:" + reason[5] + ",调研景区：" + reason[0]
         if reason[6] in suggesstionDick and reason[0] in countingDict:
@@ -71,11 +83,21 @@ def analysingProcess(reason, countingDict, suggesstionDick, totalCustomer, usele
             uselessConsumer.append("1")
         else:
             suggesstionDick[reason[6]] = suggesstion
-    statistics = statisticsProcess(totalCustomer, uselessConsumer, countingDict, distributeConsumerDict)
-    return statistics
 
 
-# This function is used to deal with the statistics exhibition.
+# Computing the different classes of the dissatisfied consumers.
+def unSatisfiedItemsResearch(countingDict, unSatisfiedItems):
+    result = {}
+    for key, value in countingDict.items():
+        if key in unSatisfiedItems:
+            unsatisfiedItem = unSatisfiedItems[key]
+            result[key] = unsatisfiedItem / value
+        else:
+            result[key] = 0
+    return result
+
+
+# This function is used to deal with the comparison between satisfied and dissatisfied.
 def statisticsProcess(total, useless, countingDict, distributeConsumerDict):
     statistics = {}
     if total != 0:
@@ -93,6 +115,6 @@ def statisticsProcess(total, useless, countingDict, distributeConsumerDict):
 
 
 # @Test
-# data = dataProgramming()
-# print(data)
+data = dataProgramming()
+print(data)
 
